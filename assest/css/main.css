@@ -1,0 +1,111 @@
+:root {
+    --color-app-1: #50acf7;
+    --color-app-2: #f64396;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Sedgwick Ave Display';
+}
+
+body {
+    background: linear-gradient(100deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+}
+
+container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+title-app {
+    text-align: center;
+    font-size: 50px;
+}
+
+#big-title {}
+
+#small-title {}
+
+container-app {
+    background: red;
+    padding: 20px;
+    border-radius: 20px;
+    border: 5px solid #5ef151;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+#input-title {
+    height: 40px;
+    outline: none;
+    border: 1.4px solid aqua;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'Sedgwick Ave Display';
+    text-align: center;
+    font-size: 18px;
+}
+
+#input-title::placeholder {
+    color: var(--color-app-2);
+    text-align: center;
+    font-family: 'Sedgwick Ave Display';
+}
+
+text-controll {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 22px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btn-controll {
+    width: 200px;
+    padding: 10px;
+    outline: 1.6px solid var(--color-app-1);
+    line-height: .9;
+    border-radius: 50px;
+
+}
+
+wrapper {
+    width: 440px;
+    height: 350px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+output-image {
+    display: block;
+    position: absolute;
+    width: 90%;
+    height: 92%;
+    background-size: cover;
+    border-radius: 50px;
+    background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/img20/pets/dog_shop_by_category/Storefront_440x440_Flea--Tick_-dog-_-EN.png);
+}
+
+output-title {
+    position: absolute;
+    width: 300px;
+    height: 40px;
+    z-index: 100;
+    background-color: rgba(68, 206, 123, .4);
+    border-radius: 20px;
+    border: 2px solid var(--color-app-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
