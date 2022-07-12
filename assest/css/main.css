@@ -83,13 +83,17 @@ text-controll {
 .btn-file{
     cursor: pointer;
     position: absolute;
-    width: 170px;
-    left: 117px;
-    top: 209px;
+    width: 175px;
+    left: 0px;
+    top: 0px;
     z-index: 100;
     border-radius: 50px;
     height: 39px;
     opacity: 0;
+}
+
+.btn-file::-webkit-file-upload-button {
+    display: none;
 }
 
 .btn-file-top{
