@@ -1,6 +1,7 @@
 :root {
     --color-app-1: #50acf7;
     --color-app-2: #f64396;
+    --text-color-1: #666;
 }
 
 * {
@@ -14,7 +15,7 @@ html {
 }
 
 body {
-    background: linear-gradient(100deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+    background: linear-gradient(159deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
 }
 
 container {
@@ -33,10 +34,11 @@ title-app {
 #small-title {}
 
 container-app {
-    background: red;
+    background: rgb(245 66 150 / 30%);
     padding: 20px;
     border-radius: 20px;
-    border: 5px solid #5ef151;
+    border: 5px solid var(--color-app-1);
+    width: 450px;
 }
 
 form {
@@ -47,7 +49,7 @@ form {
 #input-title {
     height: 40px;
     outline: none;
-    border: 1.4px solid aqua;
+    border: 1.6px solid var(--color-app-1);
     border-radius: 20px;
     padding: 10px;
     font-family: 'Sedgwick Ave Display';
@@ -65,47 +67,60 @@ text-controll {
     display: flex;
     justify-content: space-evenly;
     font-size: 22px;
-    margin-top: 10px;
+    margin: 20px 0 20px 0;
     text-align: center;
 }
 
 .btn-controll {
-    width: 200px;
+    width: 175px;
     padding: 10px;
     outline: 1.6px solid var(--color-app-1);
     line-height: .9;
-    border-radius: 50px;
-
+    border-radius: 20px;
+    cursor: pointer;
 }
 
-wrapper {
-    width: 440px;
-    height: 350px;
+.btn-file{
+    cursor: pointer;
+    position: absolute;
+    width: 170px;
+    left: 117px;
+    top: 209px;
+    z-index: 100;
+    border-radius: 50px;
+    height: 39px;
+    opacity: 0;
+}
+
+.btn-file-top{
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 output-image {
-    display: block;
-    position: absolute;
-    width: 90%;
-    height: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
     background-size: cover;
-    border-radius: 50px;
-    background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/img20/pets/dog_shop_by_category/Storefront_440x440_Flea--Tick_-dog-_-EN.png);
+    background-repeat: no-repeat;
+    border-radius: 30px;
+    background-position: center;
+    position: relative;
+    aspect-ratio: 1/1;
 }
 
 output-title {
     position: absolute;
-    width: 300px;
+    width: 90%;
     height: 40px;
     z-index: 100;
-    background-color: rgba(68, 206, 123, .4);
+    background-color: rgb(80 172 247 / 30%);
     border-radius: 20px;
     border: 2px solid var(--color-app-1);
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    font-size: 18px;
 }

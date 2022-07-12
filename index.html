@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song's title</title>
+    <title>Images Title</title>
     <link rel="stylesheet" href="./assest/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -20,24 +21,28 @@
         <container-app>
 
             <form action="">
-                <input id="input-title" type="text" placeholder="Song's title">
+                <input id="input-title" type="text" placeholder="lmages Title">
                 <text-controll>
-                    <span class="btn-controll">Form File</span>
-                    <span class="btn-controll">From Url</span>
+                    <span class="btn-controll btn-file-top">Form File</span>
+                    <input class="btn-file" type="file" onchange="encodeImageFileAsURL(this)"/>
+
+
+                    <span class="btn-controll btn-url">From Url</span>
                 </text-controll>
             </form>
 
-            <wrapper>
-                <output-image>
-
-                </output-image>
+            <output-image
+                style="background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/img20/pets/dog_shop_by_category/Storefront_440x440_Flea--Tick_-dog-_-EN.png);">
                 <output-title>
 
                 </output-title>
-            </wrapper>
+            </output-image>
+
         </container-app>
     </container>
+
+
+    <script src="./assest/js/main.js"></script>
 </body>
-<script src="./assest/js/main.js"></script>
 
 </html>
