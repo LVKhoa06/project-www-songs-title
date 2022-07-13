@@ -5,12 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Images Title</title>
-    <link rel="stylesheet" href="./assest/css/main.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="icon" href="./assets/img/icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+    <!-- <img src="https://source.unsplash.com/collection/8613850" alt=""> -->
     <container>
         <title-app>
             <span id="big-title">StarMaker</span>
@@ -24,27 +28,34 @@
                 <input id="input-title" type="text" placeholder="lmages Title">
                 <text-controll>
                     <span class="btn-controll btn-file-top">Form File
-
-                        <input class="btn-file" type="file" onchange="encodeImageFileAsURL(this)"/>
+                        <input class="btn-file" type="file" onchange="encodeImageFileAsURL(this)" />
                     </span>
-
 
                     <span class="btn-controll btn-url">From Url</span>
                 </text-controll>
             </form>
+            <controll>
+                <i class="fa-solid fa-heart icon-controll icon-heart"></i>
+                <i class="fa-solid fa-arrow-rotate-right icon-controll icon-re"></i>
 
-            <output-image
-                style="background-image: url(https://images-na.ssl-images-amazon.com/images/G/01/img20/pets/dog_shop_by_category/Storefront_440x440_Flea--Tick_-dog-_-EN.png);">
+
+                <i class="fa-solid fa-download icon-controll icon-download btn-save-image"></i>
+
+
+
+            </controll>
+            <output-image style="background-image: url(./assets/img/background.jpg);">
                 <output-title>
-
                 </output-title>
             </output-image>
 
         </container-app>
     </container>
 
-
-    <script src="./assest/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+        integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
