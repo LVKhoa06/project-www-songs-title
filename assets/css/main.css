@@ -1,7 +1,7 @@
 :root {
     --color-app-1: #50acf7;
     --color-app-2: #f64396;
-    --text-color-1: #666;
+    --text-color-1: #555;
 }
 
 * {
@@ -46,6 +46,42 @@ form {
     flex-direction: column;
 }
 
+controll{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+}
+
+.icon-controll{
+    font-size: 20px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    outline: 1.5px solid var(--color-app-1);
+    background-color: rgba(18, 188, 254, .2);
+    border-radius: 50%;
+
+}
+
+.icon-controll:hover{
+    opacity: .7;
+}
+
+.icon-heart {
+    color:  var(--color-app-2);
+}
+
+.icon-re {
+    color:  var(--color-app-1);
+}
+
+.icon-download {
+    color:  var(--text-color-1);
+}
+
+
 #input-title {
     height: 40px;
     outline: none;
@@ -67,7 +103,7 @@ text-controll {
     display: flex;
     justify-content: space-evenly;
     font-size: 22px;
-    margin: 20px 0 20px 0;
+    margin: 20px 0 0px 0;
     text-align: center;
 }
 
@@ -80,7 +116,11 @@ text-controll {
     cursor: pointer;
 }
 
-.btn-file{
+.btn-controll:hover {
+    color: var(--text-color-1);
+}
+
+.btn-file {
     cursor: pointer;
     position: absolute;
     width: 175px;
@@ -89,14 +129,14 @@ text-controll {
     z-index: 100;
     border-radius: 50px;
     height: 39px;
-    opacity: 0;
+    font-size: 0px;
 }
 
 .btn-file::-webkit-file-upload-button {
     display: none;
 }
 
-.btn-file-top{
+.btn-file-top {
     position: relative;
 }
 
