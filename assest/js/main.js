@@ -1,6 +1,6 @@
 const c = console.log;
 
-
+// console.log('v3')
 const containerApp = document.querySelector('container-app');
 const wrapper = containerApp.querySelector('wrapper');
 const image = containerApp.querySelector('output-image');
@@ -16,28 +16,59 @@ inputTitle.oninput = function () {
 
 outputTitle.onclick = function (e) {
     e.stopPropagation();
-}
+} // outputTitle.onclick
 
-image.onclick = function (e) {
-    c(e.offsetY);
-    outputTitle.style = `top:${e.offsetY}`;
-}
+// image.onclick = function (e) {
+//     c(e.offsetY);
+//     outputTitle.style = `top:${e.offsetY}`;
+// }
+
 
 btnUrl.onclick = function () {
-    let inputUrl = prompt('Nhập URL ảnh');
+    const inputUrl = prompt('Nhập URL ảnh');
     const regexCheckUrlImage = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|png|svg))/i;
-    if (inputUrl.match(regexCheckUrlImage))
-        image.style = `background-image: url(${inputUrl})`;
-    else alert('URL không hợp lệ');
-}
+    try {
+        if (inputUrl.match(regexCheckUrlImage))
+            image.style = `background-image: url(${inputUrl})`;
+        else alert('URL không hợp lệ');
+    } catch { }
+} // btnUrl.onclick
 
 function encodeImageFileAsURL(element) {
-    let file = element.files[0];
-    let reader = new FileReader();
+    const file = element.files[0];
+    const reader = new FileReader();
     reader.onloadend = function () {
         image.style = `background-image: url(${reader.result})`;
     }
     reader.readAsDataURL(file);
-}
+} // encodeImageFileAsURL
 
 
+
+outputTitle.onmousedown = function (e) {
+    image.ondragstart = function () {
+        return false;
+    };
+
+    // centers the outputTitle at (offsetY) coordinates
+    function moveAt(offsetY) {
+        outputTitle.style.top = offsetY + 'px'
+    }
+
+    // move our absolutely positioned outputTitle under the pointer
+    function onMouseMove(e) {
+        moveAt(e.offsetY);
+    }
+
+    // move the outputTitle on mousemove
+    outputTitle.addEventListener('mousemove', onMouseMove);
+    image.addEventListener('mousemove', onMouseMove);
+
+    // drop the outputTitle, remove unneeded handlers
+    outputTitle.onmouseup = function () {
+        c(e.offsetY);
+        outputTitle.removeEventListener('mousemove', onMouseMove);
+        im.removeEventListener('mousemove', onMouseMove);
+        outputTitle.onmouseup = null;
+    };
+};
