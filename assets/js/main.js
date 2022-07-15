@@ -12,6 +12,7 @@ const btnSaveImg = document.querySelector('.btn-save-image');
 const iconRe = document.querySelector('.icon-re');
 const iconHeart = document.querySelector('.icon-heart');
 
+const regexCheckUrlImage = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|png|svg))/i;
 // Title output auto update when input changes
 inputTitle.oninput = function () {
     outputTitle.innerText = inputTitle.value;
@@ -19,7 +20,6 @@ inputTitle.oninput = function () {
 
 btnUrl.onclick = function () {
     const inputUrl = prompt('Nhập URL ảnh');
-    const regexCheckUrlImage = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|png|svg))/i;
     try {
         if (inputUrl.match(regexCheckUrlImage))
             image.style = `background-image: url(${inputUrl})`;
@@ -84,18 +84,28 @@ iconRe.onclick = function () {
     localStorage.setItem('urlImg', './assets/img/background.jpg');
 } // iconRe.onclick
 
-iconHeart.onclick = function () {
-    html2canvas(image).then(function (canvas) {
-        let anchor = document.createElement('a');
-        anchor.href = canvas.toDataURL('image/png');
-        anchor.download = 'IMAGE.PNG';
-        localStorage.setItem('urlImg', anchor.href);
-    })
-} // iconHeart.onclick
 
-window.onload = () => {
+
+iconHeart.onclick = function () {
+    const getUrl = image.style.backgroundImage.replace('url("', '').replace('")', '');
+    if (getUrl.match(regexCheckUrlImage)) {
+        localStorage.setItem('urlImg', getUrl);
+    } else {
+        html2canvas(image).then(function (canvas) {
+            let anchor = document.createElement('a');
+            anchor.href = canvas.toDataURL('image/png');
+            localStorage.setItem('urlImg', anchor.href);
+        })
+    }
+}
+
+window.onload = function () {
+    localStorage.setItem('defaultImg', image.style.backgroundImage);
+    if (image.style.backgroundImage === localStorage.getItem('defaultImg'))
+        image.style = `background-image: url(${localStorage.getItem('defaultImg')})`;
+
     image.style = `background-image: url(${localStorage.getItem('urlImg')})`;
-} // window.onload 
+}
 
 btnSaveImg.onclick = () => {
     html2canvas(image).then(function (canvas) {
@@ -105,3 +115,13 @@ btnSaveImg.onclick = () => {
         anchor.click();
     });
 } // btnSaveImg.onclick
+
+
+
+
+outputTitle.style.lineHeight = 1.3
+
+const divHeight = outputTitle.offsetHeight
+const lineHeight = outputTitle.style.lineHeight.replace('px', '');
+const lines = divHeight / lineHeight;
+console.log(lines);

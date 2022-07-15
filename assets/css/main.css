@@ -29,10 +29,6 @@ title-app {
     font-size: 50px;
 }
 
-#big-title {}
-
-#small-title {}
-
 container-app {
     background: rgb(245 66 150 / 30%);
     padding: 20px;
@@ -46,7 +42,7 @@ form {
     flex-direction: column;
 }
 
-controll{
+controll {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +50,7 @@ controll{
     height: 60px;
 }
 
-.icon-controll{
+.icon-controll {
     font-size: 20px;
     padding: 5px;
     margin: 5px;
@@ -65,20 +61,20 @@ controll{
 
 }
 
-.icon-controll:hover{
+.icon-controll:hover {
     opacity: .7;
 }
 
 .icon-heart {
-    color:  var(--color-app-2);
+    color: var(--color-app-2);
 }
 
 .icon-re {
-    color:  var(--color-app-1);
+    color: var(--color-app-1);
 }
 
 .icon-download {
-    color:  var(--text-color-1);
+    color: var(--text-color-1);
 }
 
 
@@ -167,4 +163,6 @@ output-title {
     justify-content: center;
     opacity: 1;
     font-size: 18px;
+    text-align: center;
+    cursor: s-resize;
 }
