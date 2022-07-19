@@ -22,6 +22,7 @@ container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px 0;
 }
 
 title-app {
@@ -66,7 +67,11 @@ controll {
 }
 
 .icon-heart {
-    color: var(--color-app-2);
+    color: rgb(254, 132, 193);
+}
+
+.icon-heart-click {
+    color: var(--color-app-2) !important;
 }
 
 .icon-re {
@@ -144,16 +149,16 @@ output-image {
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 30px;
     background-position: center;
     position: relative;
     aspect-ratio: 1/1;
+    padding: 10px;
 }
 
 output-title {
     position: absolute;
     width: 90%;
-    height: 40px;
+    min-height: 40px;
     z-index: 100;
     background-color: rgb(80 172 247 / 30%);
     border-radius: 20px;
@@ -164,5 +169,6 @@ output-title {
     opacity: 1;
     font-size: 18px;
     text-align: center;
-    cursor: s-resize;
+    cursor: move;
+    padding: 4px 8px;
 }
