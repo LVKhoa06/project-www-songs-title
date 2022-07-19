@@ -1,6 +1,6 @@
+/*------------------------------------*/'use strict'/*------------------------------------*/
+//#region declare const start
 const c = console.log;
-
-// console.log('v3')
 const containerApp = document.querySelector('container-app');
 const wrapper = containerApp.querySelector('wrapper');
 const image = containerApp.querySelector('output-image');
@@ -11,22 +11,67 @@ const btnFile = document.querySelector('.btn-file');
 const btnSaveImg = document.querySelector('.btn-save-image');
 const iconRe = document.querySelector('.icon-re');
 const iconHeart = document.querySelector('.icon-heart');
-
 const regexCheckUrlImage = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif|png|svg))/i;
+//#endregion declare const end
+
+//#region block code start
 // Title output auto update when input changes
 inputTitle.oninput = function () {
     outputTitle.innerText = inputTitle.value;
 } // inputTitle.oninput
 
-btnUrl.onclick = function () {
+inputTitle.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+        btnSaveImg.click();
+    }
+} // inputTitle.onkeydown
+
+btnUrl.onclick = async function () {
     const inputUrl = prompt('Nhập URL ảnh');
+
+    // check link hop le
     try {
-        if (inputUrl.match(regexCheckUrlImage))
-            image.style = `background-image: url(${inputUrl})`;
-        else alert('URL không hợp lệ');
+        if (!inputUrl.match(regexCheckUrlImage))
+            if (inputUrl == '') {
+                return alert('URL Image trống');
+            } else alert('URL Image không hợp lệ');
+        try {
+            if (inputUrl.match(regexCheckUrlImage)) {
+                await fetch(inputUrl);
+                image.style.backgroundImage = `url(${inputUrl})`;
+            }
+        } catch (error) {
+            alert('Không thể lấy hình ảnh');
+        }
     } catch { }
 } // btnUrl.onclick
+let nPaddingImage = window.getComputedStyle(image).padding.replace('px', '');
 
+// case 1 = bottom;
+// case 2 = top;
+// case 3 = center;
+let TITLE_POSITIONS = 1;
+outputTitle.ontouchend = function () {
+
+    switch (TITLE_POSITIONS) {
+        case 1:
+            outputTitle.style.top = image.offsetHeight - outputTitle.offsetHeight - Number(nPaddingImage);
+            TITLE_POSITIONS = 2;
+
+            break;
+        case 2:
+            outputTitle.style.top = 0 + Number(nPaddingImage);
+            TITLE_POSITIONS = 3;
+
+            break;
+        case 3:
+            outputTitle.style.top = (image.offsetHeight - outputTitle.offsetHeight) / 2;
+            TITLE_POSITIONS = 1;
+
+            break;
+    }
+} // outputTitle.ontouchend
 
 //Make the DIV element draggagle:
 function dragElement(element) {
@@ -48,6 +93,7 @@ function dragElement(element) {
         containerApp.onmousemove = elementDrag;
     }
     function elementDrag(e) {
+
         e = e || window.event;
         e.preventDefault();
         // calculate the new cursor position:
@@ -55,10 +101,10 @@ function dragElement(element) {
         pos2 = e.clientY;
         element.style.top = element.offsetTop - pos1;
 
-        if (element.offsetTop - pos1 < 0) {
-            element.style.top = 0;
-        } else if (element.offsetTop - pos1 > 360) {
-            element.style.top = 360;
+        if (element.offsetTop - pos1 < nPaddingImage) {
+            element.style.top = window.getComputedStyle(image).padding;
+        } else if (element.offsetTop - pos1 > image.offsetHeight - outputTitle.offsetHeight - nPaddingImage) {
+            element.style.top = image.offsetHeight - outputTitle.offsetHeight - nPaddingImage;
         }
     }
     function closeDragElement() {
@@ -69,59 +115,60 @@ function dragElement(element) {
 } // dragElement
 dragElement(containerApp.querySelector("#drag-drop"));
 
-
 function encodeImageFileAsURL(element) {
     const file = element.files[0];
     const reader = new FileReader();
     reader.onloadend = function () {
-        image.style = `background-image: url(${reader.result})`;
+        image.style.backgroundImage = `url(${reader.result})`;
     }
     reader.readAsDataURL(file);
 } // encodeImageFileAsURL
-
+const defaultImg = './assets/img/background.jpg';
 iconRe.onclick = function () {
-    image.style = 'background-image: url(./assets/img/background.jpg)';
-    localStorage.setItem('urlImg', './assets/img/background.jpg');
+    inputTitle.value = '';
+    outputTitle.textContent = '';
+    localStorage.setItem('urlImg', defaultImg);
+    image.style.backgroundImage = `url(${defaultImg})`;
 } // iconRe.onclick
 
-
-
 iconHeart.onclick = function () {
+    iconHeart.classList.toggle('icon-heart-click');
     const getUrl = image.style.backgroundImage.replace('url("', '').replace('")', '');
     if (getUrl.match(regexCheckUrlImage)) {
-        localStorage.setItem('urlImg', getUrl);
-    } else {
+        localStorage.setItem('urlImg', image.style.backgroundImage);
+    } else if (image.style.backgroundImage == localStorage.getItem('defaultImg')) {
+        localStorage.setItem('urlImg', localStorage.getItem('defaultImg'));
+    }
+    else {
         html2canvas(image).then(function (canvas) {
             let anchor = document.createElement('a');
             anchor.href = canvas.toDataURL('image/png');
-            localStorage.setItem('urlImg', anchor.href);
+            localStorage.setItem('urlImg', `url(${anchor.href})`);
         })
     }
-}
+} // iconHeart.onclick
 
 window.onload = function () {
-    localStorage.setItem('defaultImg', image.style.backgroundImage);
-    if (image.style.backgroundImage === localStorage.getItem('defaultImg'))
-        image.style = `background-image: url(${localStorage.getItem('defaultImg')})`;
+    image.style.backgroundImage = `url(${defaultImg})`;
+    if (localStorage.getItem('urlImg') != `url("${defaultImg}")`) {
 
-    image.style = `background-image: url(${localStorage.getItem('urlImg')})`;
-}
+        image.style.backgroundImage = localStorage.getItem('urlImg');
+    }
 
+    // image.style.backgroundImage = `url(${defaultImg})`;
+} // window.onload
+
+const html2canvasOption = {
+    allowTaint: true,
+    useCORS: true
+} // html2canvasOption
 btnSaveImg.onclick = () => {
-    html2canvas(image).then(function (canvas) {
+    let nameFile = outputTitle.textContent.replace(' ', '-');
+    html2canvas(image, html2canvasOption).then(function (canvas) {
         let anchor = document.createElement('a');
         anchor.href = canvas.toDataURL('image/png');
-        anchor.download = 'image.PNG';
+        anchor.download = `${nameFile}`;
         anchor.click();
     });
 } // btnSaveImg.onclick
-
-
-
-
-outputTitle.style.lineHeight = 1.3
-
-const divHeight = outputTitle.offsetHeight
-const lineHeight = outputTitle.style.lineHeight.replace('px', '');
-const lines = divHeight / lineHeight;
-console.log(lines);
+//#endregion block code end
